@@ -168,8 +168,10 @@ jnigen {
     add(Linux, x64, ARM, {
         linkerConfig(it, 'aarch')
     })
-    // MacOsX builds for ARM64 and AMD64 regardless of isARM
     add(MacOsX, x64, false, {
+        linkerConfig(it, 'macosxa')
+    })
+    add(MacOsX, x64, ARM, {
         linkerConfig(it, 'macosxa')
     })
 //    // Until jnigen allows 64-bit-only iOS builds
@@ -212,6 +214,7 @@ tasks.jnigenBuildLinuxARM64.dependsOn(tasks.buildLuaAARCH)
 tasks.jnigenBuildWindows.dependsOn(tasks.buildLuaWin32)
 tasks.jnigenBuildWindows64.dependsOn(tasks.buildLuaWin64)
 tasks.jnigenBuildMacOsX64.dependsOn(tasks.buildLuaMacOsXMerge)
+tasks.jnigenBuildMacOsXARM64.dependsOn(tasks.buildLuaMacOsXMerge)
 tasks.jnigenBuildAndroid.dependsOn(tasks.buildLuaAndroid)
 // tasks.jnigenBuildIOS.dependsOn(tasks.buildLuaIOS)
 

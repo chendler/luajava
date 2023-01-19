@@ -15,7 +15,7 @@ on:
       - main
 
 env:
-  MACOSX_DEPLOYMENT_TARGET: "10.10"
+  MACOSX_DEPLOYMENT_TARGET: "11.0"
 
 jobs:
   apple-natives:
@@ -358,28 +358,28 @@ jobs:
         if: |
           startsWith(github.ref, 'refs/tags/')
         run: echo "IS_RELEASE=true" >> $GITHUB_ENV
-      - name: Publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-          GPG_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
-          GPG_PASSPHRASE: ${{ secrets.SIGNING_PASSPHRASE }}
-          GPG_SECKEY: ${{ secrets.SIGNING_SECRET_KEY }}
-          GITHUB_REF: ${{ github.ref }}
-        run: |
-          ./gradlew build publish
-      - name: Build example
-        run: |
-          ./gradlew :example:shadowJar
-      - name: Upload example
-        uses: actions/upload-artifact@v2.1.4
-        with:
-          name: example
-          path: example/build/libs/example-all.jar
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          draft: true
-          files: example/build/libs/example-all.jar
+      # - name: Publish
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+      #     MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+      #     GPG_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+      #     GPG_PASSPHRASE: ${{ secrets.SIGNING_PASSPHRASE }}
+      #     GPG_SECKEY: ${{ secrets.SIGNING_SECRET_KEY }}
+      #     GITHUB_REF: ${{ github.ref }}
+      #   run: |
+      #     ./gradlew build publish
+      # - name: Build example
+      #   run: |
+      #     ./gradlew :example:shadowJar
+      # - name: Upload example
+      #   uses: actions/upload-artifact@v2.1.4
+      #   with:
+      #     name: example
+      #     path: example/build/libs/example-all.jar
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   with:
+      #     draft: true
+      #     files: example/build/libs/example-all.jar
