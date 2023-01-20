@@ -172,7 +172,7 @@ jnigen {
         linkerConfig(it, 'macosxa')
     })
     add(MacOsX, x64, ARM, {
-        linkerConfig(it, 'macosxa')
+        linkerConfig(it, 'macosxaarch')
     })
 //    // Until jnigen allows 64-bit-only iOS builds
 //    add(IOS, x64) {
@@ -214,7 +214,6 @@ tasks.jnigenBuildLinuxARM64.dependsOn(tasks.buildLuaAARCH)
 tasks.jnigenBuildWindows.dependsOn(tasks.buildLuaWin32)
 tasks.jnigenBuildWindows64.dependsOn(tasks.buildLuaWin64)
 tasks.jnigenBuildMacOsX64.dependsOn(tasks.buildLuaMacOsXMerge)
-tasks.jnigenBuildMacOsXARM64.dependsOn(tasks.buildLuaMacOsXMerge)
 tasks.jnigenBuildAndroid.dependsOn(tasks.buildLuaAndroid)
 // tasks.jnigenBuildIOS.dependsOn(tasks.buildLuaIOS)
 
